@@ -1,6 +1,6 @@
 // 改自 https://github.com/kingwkb/readability python版本
 // 于2016-11-10
-// by: ying32  
+// by: ying32
 package readability
 
 import (
@@ -112,13 +112,19 @@ func (self *TReadability) fixImagesPath(node *goquery.Selection) {
 
 		func(i int, img *goquery.Selection) {
 			src, _ := img.Attr("src")
+			dataSrc, _ := img.Attr("data-src")
 			// dz论坛的有些img属性使用的是file字段
 			if f, ok := img.Attr("file"); ok {
 				src = f
 				img.SetAttr("src", f)
 				img.RemoveAttr("file")
 			}
-			if src == "" {
+			if ds, ok := img.Attr("data-src"); ok {
+				dataSrc = ds
+				img.SetAttr("src", ds)
+				img.RemoveAttr("data-src")
+			}
+			if src == "" && dataSrc == "" {
 				img.Remove()
 				return
 			}

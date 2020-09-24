@@ -7,7 +7,6 @@ import (
 	"compress/flate"
 	"compress/gzip"
 
-	"errors"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -34,7 +33,7 @@ func httpGet(url string) (string, error) {
 	}
 
 	if resp.StatusCode != 200 {
-		return "", errors.New("error")
+		return "", nil
 	}
 
 	defer resp.Body.Close()

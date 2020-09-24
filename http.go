@@ -28,9 +28,14 @@ func httpGet(url string) (string, error) {
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
-	if err != nil {
+	if err != nil || resp == nil{
 		return "", err
 	}
+
+	if resp.StatusCode != 200 {
+		return "", errors.New("error")
+	}
+
 	defer resp.Body.Close()
 	contentEncoding := strings.Trim(strings.ToLower(resp.Header.Get("Content-Encoding")), " ")
 	var bytes []byte

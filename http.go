@@ -1,16 +1,16 @@
 // 改自 https://github.com/kingwkb/readability python版本
 // 于2016-11-10
-// by: ying32 
+// by: ying32
 package readability
 
 import (
 	"compress/flate"
 	"compress/gzip"
 
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"strings"
-	"errors"
 
 	"github.com/axgle/mahonia"
 )
@@ -29,7 +29,7 @@ func httpGet(url string) (string, error) {
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
-	if err != nil || resp == nil{
+	if err != nil || resp == nil {
 		return "", err
 	}
 

@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"errors"
 
 	"github.com/axgle/mahonia"
 )
